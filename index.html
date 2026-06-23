@@ -84,6 +84,31 @@
             padding: 16px;
         }
 
+        /* TOP CREDIT BANNER */
+        .credit-banner {
+            background: linear-gradient(135deg, #0066CC 0%, #004999 100%);
+            color: white;
+            padding: 14px 20px;
+            border-radius: 60px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 16px;
+            letter-spacing: 0.5px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,102,204,0.3);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .credit-banner i {
+            margin-right: 10px;
+            opacity: 0.9;
+        }
+        .credit-banner span {
+            background: rgba(255,255,255,0.15);
+            padding: 2px 14px;
+            border-radius: 30px;
+            font-weight: 700;
+        }
+
         /* HEADER - MOBILE OPTIMIZED */
         .header-card {
             background: white;
@@ -150,7 +175,7 @@
             object-fit: cover;
         }
 
-        /* ACTIONS BAR - STACK ON MOBILE */
+        /* ACTIONS BAR - only search remains */
         .actions-bar {
             display: flex;
             flex-direction: column;
@@ -179,42 +204,6 @@
             transition: 0.2s;
         }
         #searchInput:focus { outline: none; border-color: #0066CC; box-shadow: 0 0 0 3px rgba(0,102,204,0.1); }
-        .btn-group {
-            display: flex;
-            gap: 10px;
-            width: 100%;
-        }
-        .btn-group button {
-            flex: 1;
-            justify-content: center;
-            padding: 12px 0;
-            font-size: 14px;
-        }
-        .btn-primary {
-            background: #0066CC;
-            border: none;
-            border-radius: 50px;
-            color: white;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-        .btn-primary:active { transform: scale(0.97); background: #004999; }
-        .btn-outline {
-            background: white;
-            border: 2px solid #CBD5E1;
-            border-radius: 50px;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-        .btn-outline:active { transform: scale(0.97); border-color: #0066CC; color: #0066CC; }
 
         /* TOGGLE BUTTONS - MOBILE FRIENDLY */
         .toggle-wrap {
@@ -288,7 +277,7 @@
         .address-line span { word-break: break-word; }
         .card-footer {
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-start;
             align-items: center;
             border-top: 1px solid #EDF2F7;
             padding-top: 14px;
@@ -309,21 +298,6 @@
             font-size: 13px;
         }
         .nav-btn:active { background: #0066CC; color: white; transform: scale(0.96); }
-        .action-btns { display: flex; gap: 8px; }
-        .icon-btn {
-            width: 40px;
-            height: 40px;
-            border-radius: 12px;
-            border: none;
-            cursor: pointer;
-            font-size: 16px;
-            transition: 0.15s;
-        }
-        .icon-btn:active { transform: scale(0.92); }
-        .edit-btn { background: #FFF1E0; color: #E68A2E; }
-        .edit-btn:active { background: #E68A2E; color: white; }
-        .delete-btn { background: #FFEBEE; color: #E5484D; }
-        .delete-btn:active { background: #E5484D; color: white; }
         .card-badge {
             position: absolute;
             bottom: 12px;
@@ -352,7 +326,7 @@
             -webkit-overflow-scrolling: touch;
         }
         .table-view.active-view { display: block; }
-        .market-table { width: 100%; border-collapse: collapse; min-width: 700px; }
+        .market-table { width: 100%; border-collapse: collapse; min-width: 600px; }
         .market-table th { text-align: left; padding: 14px 16px; background: #F8FAFE; color: #1E293B; font-weight: 600; font-size: 13px; border-bottom: 2px solid #E9EDF2; }
         .market-table td { padding: 12px 16px; border-bottom: 1px solid #F0F2F5; vertical-align: middle; font-size: 13px; }
         .market-table tr { cursor: pointer; transition: 0.1s; }
@@ -366,86 +340,6 @@
             vertical-align: middle;
         }
         .market-table td a { font-size: 12px; }
-
-        /* MODAL - FULLSCREEN ON MOBILE BETTER */
-        .modal {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.6);
-            backdrop-filter: blur(5px);
-            z-index: 2000;
-            align-items: center;
-            justify-content: center;
-            padding: 16px;
-        }
-        .modal.active { display: flex; }
-        .modal-content {
-            background: white;
-            width: 100%;
-            max-width: 500px;
-            border-radius: 32px;
-            overflow: hidden;
-            animation: modalIn 0.2s ease;
-            max-height: 90vh;
-            overflow-y: auto;
-        }
-        @keyframes modalIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
-        .modal-header {
-            background: #0066CC;
-            padding: 18px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: white;
-            position: sticky;
-            top: 0;
-        }
-        .modal-header h3 { font-size: 20px; font-weight: 700; }
-        .modal-header div { display: flex; align-items: center; gap: 12px; }
-        .modal-header img {
-            width: 40px;
-            height: 40px;
-            border-radius: 12px;
-            object-fit: cover;
-            border: 2px solid white;
-            background: white;
-        }
-        .modal-body { padding: 20px; }
-        .form-group { margin-bottom: 18px; }
-        .form-group label { display: block; font-weight: 600; margin-bottom: 6px; color: #1E293B; font-size: 14px; }
-        .form-group input, .form-group textarea { width: 100%; padding: 12px; border: 2px solid #E2E8F0; border-radius: 16px; font-size: 14px; }
-        .modal-actions { display: flex; justify-content: flex-end; gap: 12px; margin-top: 20px; }
-        .modal-actions button { padding: 12px 20px; font-size: 14px; }
-
-        /* TOAST - BOTTOM CENTER FOR MOBILE */
-        .toast {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            right: 20px;
-            background: white;
-            padding: 12px 20px;
-            border-radius: 60px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            transform: translateY(120px);
-            transition: transform 0.3s ease;
-            z-index: 2100;
-            border: 1px solid #E2E8F0;
-            max-width: calc(100% - 40px);
-            margin: 0 auto;
-        }
-        .toast.show { transform: translateY(0); }
-        .toast-icon img {
-            width: 32px;
-            height: 32px;
-            border-radius: 12px;
-            object-fit: cover;
-        }
-        #toastText { font-size: 14px; font-weight: 500; }
 
         footer {
             margin-top: 40px;
@@ -461,8 +355,6 @@
             .app-container { padding: 20px 24px; }
             .grid-view { grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); }
             .actions-bar { flex-direction: row; }
-            .btn-group { width: auto; }
-            .btn-group button { flex: initial; padding: 0 28px; }
             .brand h1 { font-size: 36px; }
         }
         @media (min-width: 1024px) {
@@ -482,12 +374,17 @@
 </div>
 
 <div class="app-container">
+    <!-- TOP CREDIT BANNER -->
+    <div class="credit-banner">
+        <i class=""></i> Create By <span>Twana Khasro IT</span> <i class=""></i>
+    </div>
+
     <div class="header-card">
         <div class="logo-area">
             <img src="teammartmaps.jpg" alt="TeamMart" class="logo-img" onclick="window.open('https://www.google.com/maps','_blank')" onerror="this.src='https://placehold.co/60x60/0066CC/white?text=TM'">
             <div class="brand">
                 <h1><span class="team">TeaM</span><span class="mart">Mart</span> <span style="color:#1E2A3A;">Maps</span></h1>
-                <p>First Chain in Iraq & Kurdistan </p>
+                <p>First Chain in Iraq & Kurdistan</p>
             </div>
         </div>
         <div class="stat-badge">
@@ -496,15 +393,11 @@
         </div>
     </div>
 
+    <!-- Only search remains -->
     <div class="actions-bar">
         <div class="search-wrap">
             <i class="fas fa-search"></i>
             <input type="text" id="searchInput" placeholder="Search market or address...">
-        </div>
-        <div class="btn-group">
-            <button class="btn-primary" id="openAddBtn"><i class="fas fa-plus-circle"></i> Add</button>
-            <button class="btn-outline" id="exportBtn"><i class="fas fa-download"></i> Export</button>
-            <button class="btn-outline" id="refreshBtn"><i class="fas fa-sync-alt"></i> Refresh</button>
         </div>
     </div>
 
@@ -515,32 +408,15 @@
 
     <div id="gridContainer" class="grid-view"></div>
     <div id="tableContainer" class="table-view">
-        <table class="market-table"><thead><tr><th>Market</th><th>Address</th><th>Map</th><th>Actions</th></tr></thead><tbody id="tableBody"></tbody></table>
+        <table class="market-table"><thead><tr><th>Market</th><th>Address</th><th>Map</th></tr></thead><tbody id="tableBody"></tbody></table>
     </div>
-    <footer><p>© 2026 TeamMart Maps </p></footer>
+    <footer>
+        <p>© 2026 TeamMart Maps</p>
+    </footer>
 </div>
 
 <div class="watermark">
     <img src="teammartmaps.jpg" alt="TeamMart" onerror="this.style.display='none'">
-</div>
-
-<div id="marketModal" class="modal">
-    <div class="modal-content">
-        <div class="modal-header">
-            <div>
-                <img src="teammartmaps.jpg" alt="TeamMart" onerror="this.src='https://placehold.co/40x40/0066CC/white?text=TM'">
-                <h3 id="modalTitle">Add Market</h3>
-            </div>
-            <button class="modal-close" style="background:none;border:none;font-size:28px;color:white;cursor:pointer;">&times;</button>
-        </div>
-        <div class="modal-body">
-            <input type="hidden" id="marketId">
-            <div class="form-group"><label><i class="fas fa-store"></i> Market Name *</label><input type="text" id="marketName" placeholder="e.g., ئازادی فرێش"></div>
-            <div class="form-group"><label><i class="fas fa-location-dot"></i> Address *</label><textarea id="marketAddress" rows="2" placeholder="Full address with IP"></textarea></div>
-            <div class="form-group"><label><i class="fas fa-map"></i> Google Maps Link *</label><input type="url" id="marketLink" placeholder="https://maps.app.goo.gl/..."></div>
-            <div class="modal-actions"><button class="btn-outline" id="cancelModalBtn">Cancel</button><button class="btn-primary" id="saveMarketBtn">Save</button></div>
-        </div>
-    </div>
 </div>
 
 <div id="toastMsg" class="toast"><div class="toast-icon"><img src="teammartmaps.jpg" alt="TM" onerror="this.src='https://placehold.co/32x32/0066CC/white?text=TM'"></div><span id="toastText"></span></div>
@@ -583,7 +459,6 @@
         { "id": 49, "name": "دارەتوو-١", "address": "ڕێزی یاریگای تۆپی پێی دارەتووی نوێ", "mapLink": "https://maps.app.goo.gl/xQGuBMdFrqM7vmME6" },
         { "id": 50, "name": "ڕاپەڕین", "address": "ڕێزی مستشفى ارژين ip / 192.168.1.2", "mapLink": "https://maps.app.goo.gl/eBhEZcCpKqH6k4xZ6" }
     ];
-    // Append remaining from 51 to 129 to have full dataset exactly as provided (ensuring 129 total)
     const remainingMarkets = [
         { "id": 51, "name": "ڕەواندز", "address": "ڕێزی شیرنەمەنی کۆسار پڵەس ip / 192.168.71.2", "mapLink": "https://maps.app.goo.gl/4vpijgwLFZtUE6wT9" },
         { "id": 52, "name": "ڕۆشەمبیران-١", "address": "جادەی دارەتوو پشت باخچەی ڕۆشنبیری", "mapLink": "https://maps.app.goo.gl/5XvEF87Qo84GX4xz8" },
@@ -636,8 +511,6 @@
         { "id": 99, "name": "کۆیە-١", "address": "تەنیشت کاشی براند ip / 192.168.69.2", "mapLink": "https://maps.app.goo.gl/fGZ2gmNYF9LswhVw5" },
         { "id": 100, "name": "کۆیە-٢", "address": "بەرامبەر گۆڵدن مۆڵ ip / 192.168.125.2", "mapLink": "https://maps.app.goo.gl/mDHVzco437oLhQUp7" }
     ];
-    const finalSet = [...YOUR_MARKETS, ...remainingMarkets];
-    // Extend to ID 129 using provided rest to ensure full coverage (IDs 101-129)
     const extraHigh = [
         { "id": 101, "name": "کۆیە-٣", "address": "بەرامبەر بنکەی نالی ip / 192.168.129.2", "mapLink": "https://maps.app.goo.gl/dvamweVmeEjozR316" },
         { "id": 102, "name": "کۆیە-٤", "address": "بەرامبەر Atlas Coffe ip / 192.168.164.2", "mapLink": "https://maps.app.goo.gl/x3Zgsx41sfWVGmuF8" },
@@ -669,7 +542,7 @@
         { "id": 128, "name": "هۆڵەندا", "address": "جادەی بنەسڵاوە ip / 192.168.17.2", "mapLink": "https://maps.app.goo.gl/57gE2fKCmXEE3Lzx6" },
         { "id": 129, "name": "هیران ستی", "address": "جادەی لاوان سەروی لاوان ٢ ip / 192.168.110.2", "mapLink": "https://maps.app.goo.gl/WKoYvFwGNEiFXVCd7" }
     ];
-    const ALL_MARKETS = [...finalSet, ...extraHigh];
+    const ALL_MARKETS = [...YOUR_MARKETS, ...remainingMarkets, ...extraHigh];
     
     let markets = [...ALL_MARKETS];
     let filteredMarkets = [...markets];
@@ -688,10 +561,10 @@
         const container = document.getElementById('gridContainer');
         if(!data.length) { container.innerHTML = `<div style="text-align:center; padding:60px; background:white; border-radius:32px;">🏪 No matching markets.</div>`; return; }
         container.innerHTML = data.map(m => `
-            <div class="market-card" data-id="${m.id}">
+            <div class="market-card" data-id="${m.id}" data-link="${escapeHtml(m.mapLink)}">
                 <div class="card-header"><div class="card-icon"><img src="teammartmaps.jpg" onerror="this.src='https://placehold.co/55x55/0066CC/white?text=TM'"></div><div class="card-title">${escapeHtml(m.name)}</div></div>
                 <div class="address-line"><i class="fas fa-map-pin"></i><span>${escapeHtml(m.address)}</span></div>
-                <div class="card-footer"><button class="nav-btn navigate-btn" data-link="${escapeHtml(m.mapLink)}"><i class="fas fa-map-marked-alt"></i> Navigate</button><div class="action-btns"><button class="icon-btn edit-btn" data-id="${m.id}"><i class="fas fa-edit"></i></button><button class="icon-btn delete-btn" data-id="${m.id}"><i class="fas fa-trash-alt"></i></button></div></div>
+                <div class="card-footer"><button class="nav-btn navigate-btn" data-link="${escapeHtml(m.mapLink)}"><i class="fas fa-map-marked-alt"></i> Navigate</button></div>
                 <div class="card-badge"><img src="teammartmaps.jpg" onerror="this.style.display='none'"><span>TM</span></div>
             </div>
         `).join('');
@@ -699,54 +572,18 @@
     }
     function renderTable(data) {
         const tbody = document.getElementById('tableBody');
-        if(!data.length) { tbody.innerHTML = `<tr><td colspan="4" style="text-align:center; padding:40px;">No markets</td></tr>`; return; }
-        tbody.innerHTML = data.map(m => `<tr data-id="${m.id}"><td><img src="teammartmaps.jpg" class="table-logo" onerror="this.src='https://placehold.co/36x36/0066CC/white?text=TM'"> ${escapeHtml(m.name)}</td><td>${escapeHtml(m.address)}</td><td><a href="${escapeHtml(m.mapLink)}" target="_blank" onclick="event.stopPropagation()"><i class="fas fa-external-link-alt"></i> Map</a></td><td><button class="icon-btn edit-btn" data-id="${m.id}"><i class="fas fa-edit"></i></button> <button class="icon-btn delete-btn" data-id="${m.id}"><i class="fas fa-trash-alt"></i></button></td></tr>`).join('');
+        if(!data.length) { tbody.innerHTML = `<tr><td colspan="3" style="text-align:center; padding:40px;">No markets</td></tr>`; return; }
+        tbody.innerHTML = data.map(m => `<tr data-id="${m.id}" data-link="${escapeHtml(m.mapLink)}"><td><img src="teammartmaps.jpg" class="table-logo" onerror="this.src='https://placehold.co/36x36/0066CC/white?text=TM'"> ${escapeHtml(m.name)}</td><td>${escapeHtml(m.address)}</td><td><a href="${escapeHtml(m.mapLink)}" target="_blank" onclick="event.stopPropagation()"><i class="fas fa-external-link-alt"></i> Map</a></td></tr>`).join('');
         attachEvents();
     }
     function attachEvents() {
         document.querySelectorAll('.navigate-btn').forEach(btn => btn.addEventListener('click', (e) => { e.stopPropagation(); const link = btn.dataset.link; if(link) { window.open(link, '_blank'); showToast(`📍 Opening map`); } }));
-        document.querySelectorAll('.edit-btn').forEach(btn => btn.addEventListener('click', (e) => { e.stopPropagation(); const id = parseInt(btn.dataset.id); const market = markets.find(m => m.id === id); if(market) openModal(market); }));
-        document.querySelectorAll('.delete-btn').forEach(btn => btn.addEventListener('click', (e) => { e.stopPropagation(); const id = parseInt(btn.dataset.id); if(confirm('Delete market?')) { markets = markets.filter(m => m.id !== id); updateFilteredAndRender(); showToast('🗑️ Deleted'); } }));
-        document.querySelectorAll('.market-card, #tableBody tr').forEach(el => el.addEventListener('click', (e) => { if(e.target.closest('button') || e.target.closest('a')) return; const id = parseInt(el.dataset.id); const m = markets.find(m => m.id === id); if(m?.mapLink) { window.open(m.mapLink, '_blank'); showToast(`🗺️ ${m.name}`); } }));
+        document.querySelectorAll('.market-card, #tableBody tr').forEach(el => el.addEventListener('click', (e) => { if(e.target.closest('button') || e.target.closest('a')) return; const link = el.dataset.link; if(link) { window.open(link, '_blank'); const name = el.dataset.id ? markets.find(m => m.id == el.dataset.id)?.name : ''; showToast(`🗺️ ${name || 'Market'}`); } }));
     }
-    function openModal(market = null) {
-        const modal = document.getElementById('marketModal');
-        document.getElementById('modalTitle').innerText = market ? 'Edit Market' : 'Add Market';
-        document.getElementById('marketId').value = market ? market.id : '';
-        document.getElementById('marketName').value = market ? market.name : '';
-        document.getElementById('marketAddress').value = market ? market.address : '';
-        document.getElementById('marketLink').value = market ? market.mapLink : '';
-        modal.classList.add('active');
-    }
-    function closeModal() { document.getElementById('marketModal').classList.remove('active'); }
-    function saveMarketHandler() {
-        const id = document.getElementById('marketId').value;
-        const name = document.getElementById('marketName').value.trim();
-        const address = document.getElementById('marketAddress').value.trim();
-        const mapLink = document.getElementById('marketLink').value.trim();
-        if(!name || !address || !mapLink) { showToast('❌ Fill all fields'); return; }
-        if(id) {
-            const idx = markets.findIndex(m => m.id == id);
-            if(idx !== -1) { markets[idx] = { ...markets[idx], name, address, mapLink }; showToast('✏️ Updated'); }
-        } else {
-            const newId = Date.now();
-            markets.push({ id: newId, name, address, mapLink });
-            showToast(`✅ Added: ${name}`);
-        }
-        closeModal();
-        updateFilteredAndRender();
-    }
-    document.getElementById('saveMarketBtn').onclick = saveMarketHandler;
-    document.getElementById('refreshBtn').onclick = () => { markets = ALL_MARKETS.map(m => ({...m})); updateFilteredAndRender(); showToast(`🔄 ${markets.length} markets`); };
     document.getElementById('searchInput').addEventListener('input', () => updateFilteredAndRender());
-    document.getElementById('openAddBtn').addEventListener('click', () => openModal());
-    document.getElementById('cancelModalBtn').addEventListener('click', closeModal);
-    document.querySelector('.modal-close').addEventListener('click', closeModal);
-    document.getElementById('exportBtn').addEventListener('click', () => { const blob = new Blob([JSON.stringify(markets, null, 2)], {type: 'application/json'}); const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `teammart_${markets.length}.json`; a.click(); URL.revokeObjectURL(a.href); showToast(`📁 Exported ${markets.length}`); });
     document.getElementById('gridToggle').addEventListener('click', () => { currentView = 'grid'; document.getElementById('gridContainer').style.display = 'grid'; document.getElementById('tableContainer').classList.remove('active-view'); document.getElementById('gridToggle').classList.add('active'); document.getElementById('tableToggle').classList.remove('active'); updateFilteredAndRender(); });
     document.getElementById('tableToggle').addEventListener('click', () => { currentView = 'table'; document.getElementById('gridContainer').style.display = 'none'; document.getElementById('tableContainer').classList.add('active-view'); document.getElementById('tableToggle').classList.add('active'); document.getElementById('gridToggle').classList.remove('active'); updateFilteredAndRender(); });
     window.addEventListener('load', () => { setTimeout(() => document.getElementById('preloader').classList.add('fade-out'), 700); updateFilteredAndRender(); document.getElementById('gridContainer').style.display = 'grid'; });
-    window.onclick = (e) => { if(e.target === document.getElementById('marketModal')) closeModal(); };
 </script>
 </body>
 </html>
