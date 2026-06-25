@@ -246,7 +246,7 @@
             position: relative;
             box-shadow: 0 2px 8px rgba(0,0,0,0.03);
         }
-        .market-card:active { transform: scale(0.99); background: #FEFEFE; }
+        .market-card:active { transform: scale(0.98); background: #F8FAFE; }
         .card-header { display: flex; gap: 14px; align-items: center; margin-bottom: 12px; }
         .card-icon {
             width: 55px;
@@ -289,6 +289,8 @@
             cursor: pointer;
             color: #0066CC;
             font-size: 13px;
+            transition: 0.2s;
+            text-decoration: none;
         }
         .nav-btn:active { background: #0066CC; color: white; transform: scale(0.96); }
         .card-badge {
@@ -333,79 +335,6 @@
         }
         .market-table td a { font-size: 12px; }
 
-        /* Map Modal */
-        .map-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.7);
-            z-index: 10000;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-        .map-modal.active {
-            display: flex;
-        }
-        .map-modal-content {
-            background: white;
-            border-radius: 28px;
-            width: 100%;
-            max-width: 800px;
-            max-height: 90vh;
-            overflow: hidden;
-            position: relative;
-        }
-        .map-modal-header {
-            padding: 16px 20px;
-            border-bottom: 1px solid #E9EDF2;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .map-modal-header h3 {
-            font-size: 18px;
-            color: #0F2B40;
-        }
-        .map-modal-close {
-            background: #F1F5F9;
-            border: none;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            font-size: 20px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .map-modal-close:active { background: #E2E8F0; }
-        .map-container {
-            width: 100%;
-            height: 400px;
-            background: #E9EDF2;
-        }
-        .map-container iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-        .map-modal-footer {
-            padding: 16px 20px;
-            border-top: 1px solid #E9EDF2;
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-        .map-modal-footer .nav-btn {
-            flex: 1;
-            justify-content: center;
-            min-width: 120px;
-        }
-
         footer {
             margin-top: 40px;
             text-align: center;
@@ -416,7 +345,6 @@
             padding-bottom: 10px;
         }
 
-        /* Toast */
         #toastMsg {
             position: fixed;
             bottom: 30px;
@@ -443,12 +371,10 @@
             .grid-view { grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); }
             .actions-bar { flex-direction: row; }
             .brand h1 { font-size: 36px; }
-            .map-container { height: 500px; }
         }
         @media (min-width: 1024px) {
             .grid-view { grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); }
             .brand h1 { font-size: 44px; }
-            .map-container { height: 600px; }
         }
     </style>
 </head>
@@ -502,23 +428,6 @@
     </footer>
 </div>
 
-<!-- Map Modal -->
-<div class="map-modal" id="mapModal">
-    <div class="map-modal-content">
-        <div class="map-modal-header">
-            <h3 id="modalTitle">📍 Location</h3>
-            <button class="map-modal-close" onclick="closeMap()">✕</button>
-        </div>
-        <div class="map-container" id="mapContainer">
-            <iframe id="mapFrame" src="" allowfullscreen loading="lazy"></iframe>
-        </div>
-        <div class="map-modal-footer">
-            <button class="nav-btn" id="openInGoogleBtn"><i class="fas fa-external-link-alt"></i> Open in Google Maps</button>
-            <button class="nav-btn" onclick="closeMap()" style="background:#F1F5F9;color:#475569;"><i class="fas fa-times"></i> Close</button>
-        </div>
-    </div>
-</div>
-
 <div id="toastMsg"><span id="toastText"></span></div>
 
 <div class="watermark">
@@ -526,9 +435,9 @@
 </div>
 
 <script>
-    // All markets with IP addresses removed from addresses
+    // All markets data
     const ALL_MARKETS = [
-      
+  
   { "id": 17, "name": "ئازادی فرێش", "address": "ڕێزی گەس ئازادی", "mapLink": "https://maps.app.goo.gl/8JNJiWn1Bnq5jayV6" },
   { "id": 18, "name": "ئەستێرە-١", "address": "ڕێگای بنەسڵاوە", "mapLink": "https://maps.app.goo.gl/gnbZYWnPDQc8hTm57?g_st=iw" },
   { "id": 19, "name": "ئەستێرە-٢", "address": "ڕێگای بنەسڵاوە", "mapLink": "https://maps.app.goo.gl/qimLDhShfvDSA4if7?g_st=iw" },
@@ -543,8 +452,8 @@
   { "id": 28, "name": "بەهەشت ١", "address": "ڕێگای دارەتوو بەرامبەر مزگەوتی ڕێگای بەهەشت", "mapLink": "https://goo.gl/maps/7hUQRNiMmxViGYXc8" },
   { "id": 29, "name": "بەحرکە-٤", "address": "ڕێگای بەحرکە یەکەم مارکێت", "mapLink": "https://maps.app.goo.gl/KkmJq1jRXQyKGBvcA" },
   { "id": 30, "name": "بەحرکە-٣", "address": "جادەی بەحرکە فەرعی بانکی بحرکە", "mapLink": "https://maps.app.goo.gl/hWPJxMca5xuzj3pr7?g_st=iw" },
-  { "id": 31, "name": "بەحرکە-٢", "address": "ڕێگای بەحرکە", "mapLink": "https://maps.app.goo.gl/j1WRrNQoAar2Yv7d8?g_st=iw" },
-  { "id": 32, "name": "بەحرکە-١", "address": "ڕێگای بەحرکە", "mapLink": "https://maps.app.goo.gl/Dh6XSskFFfkEqGiD8?g_st=iw" },
+  { "id": 31, "name": "بەحرکە-٢", "address": " ڕێگای بەحرکە بەرامبەر قوتابخانەی دەشتی بنەڕەتی كوڕان ", "mapLink": "https://maps.app.goo.gl/j1WRrNQoAar2Yv7d8?g_st=iw" },
+  { "id": 32, "name": "بەحرکە-١", "address": " ڕێگای بەحرکە تەنیشت مزگەوتی خەلیفە عثمان", "mapLink": "https://maps.app.goo.gl/Dh6XSskFFfkEqGiD8?g_st=iw" },
   { "id": 33, "name": "برایەتی-٢", "address": "جادەی برایەتی بەرامبەر وەزارەتی کارەبا", "mapLink": "https://goo.gl/maps/NeNe1jQPAmybbZvn7" },
   { "id": 34, "name": "بنەسڵاوە-٢", "address": "ڕێگای بنەسڵاوە سێریانی بنەسڵاوە", "mapLink": "https://maps.app.goo.gl/7vcSuu3vTDr3kP3J6" },
   { "id": 35, "name": "پیرزین-٢", "address": "یەکەم مارکێت بە دەستی چەپ", "mapLink": "https://maps.app.goo.gl/1uKst8wtgxXCEN5n9" },
@@ -651,12 +560,12 @@
   { "id": 136, "name": "ڕانیە-٣", "address": "بەرامبەر قوتابخانەی بنەڕەتی بابە گوڕگوڕ", "mapLink": "https://maps.app.goo.gl/roBFceRiC6sPDmuh8" },
   { "id": 137, "name": "ڕانیە-٤", "address": "جوت سایدی کێوەڕەش تەنیشت مزگەوتی خدر جاف", "mapLink": "https://maps.app.goo.gl/TWmp3LUun7DqE9Gk6" }
 
+
     ];
 
     let markets = [...ALL_MARKETS];
     let filteredMarkets = [...markets];
     let currentView = "grid";
-    let currentMapLink = "";
 
     function escapeHtml(str) { if(!str) return ''; return str.replace(/[&<>]/g, function(m){ if(m==='&') return '&amp;'; if(m==='<') return '&lt;'; if(m==='>') return '&gt;'; return m;}); }
     
@@ -664,24 +573,15 @@
         const toast = document.getElementById('toastMsg'); 
         document.getElementById('toastText').innerText = msg; 
         toast.classList.add('show'); 
-        setTimeout(() => toast.classList.remove('show'), 2500); 
+        setTimeout(() => toast.classList.remove('show'), 2000); 
     }
     
-    function openMap(link, name) {
-        currentMapLink = link;
-        document.getElementById('modalTitle').innerText = `📍 ${name || 'Location'}`;
-        document.getElementById('mapFrame').src = link;
-        document.getElementById('mapModal').classList.add('active');
-        document.body.style.overflow = 'hidden';
-        showToast(`🗺️ Loading ${name || 'map'}...`);
-    }
-    
-    function closeMap() {
-        document.getElementById('mapModal').classList.remove('active');
-        document.body.style.overflow = '';
-        setTimeout(() => {
-            document.getElementById('mapFrame').src = '';
-        }, 300);
+    // Direct open Google Maps - no confirmation, no modal
+    function openGoogleMaps(link, name) {
+        if(link) {
+            window.open(link, '_blank');
+            showToast(`📍 ${name} - Opening Google Maps`);
+        }
     }
     
     function updateFilteredAndRender() {
@@ -700,8 +600,7 @@
                 <div class="card-header"><div class="card-icon"><img src="teammartmaps.jpg" onerror="this.src='https://placehold.co/55x55/0066CC/white?text=TM'"></div><div class="card-title">${escapeHtml(m.name)}</div></div>
                 <div class="address-line"><i class="fas fa-map-pin"></i><span>${escapeHtml(m.address)}</span></div>
                 <div class="card-footer">
-                    <button class="nav-btn view-map-btn" data-link="${escapeHtml(m.mapLink)}" data-name="${escapeHtml(m.name)}"><i class="fas fa-map"></i> View Map</button>
-                    <button class="nav-btn navigate-btn" data-link="${escapeHtml(m.mapLink)}"><i class="fas fa-directions"></i> Navigate</button>
+                    <button class="nav-btn open-map-btn" data-link="${escapeHtml(m.mapLink)}" data-name="${escapeHtml(m.name)}"><i class="fas fa-map-marked-alt"></i> Open Map</button>
                 </div>
                 <div class="card-badge"><img src="teammartmaps.jpg" onerror="this.style.display='none'"><span>TM</span></div>
             </div>
@@ -712,57 +611,29 @@
     function renderTable(data) {
         const tbody = document.getElementById('tableBody');
         if(!data.length) { tbody.innerHTML = `<tr><td colspan="3" style="text-align:center; padding:40px;">No markets</td></tr>`; return; }
-        tbody.innerHTML = data.map(m => `<tr data-id="${m.id}" data-link="${escapeHtml(m.mapLink)}" data-name="${escapeHtml(m.name)}"><td><img src="teammartmaps.jpg" class="table-logo" onerror="this.src='https://placehold.co/36x36/0066CC/white?text=TM'"> ${escapeHtml(m.name)}</td><td>${escapeHtml(m.address)}</td><td><button class="nav-btn view-map-btn" data-link="${escapeHtml(m.mapLink)}" data-name="${escapeHtml(m.name)}" style="padding:4px 12px;font-size:12px;"><i class="fas fa-map"></i> View</button></td></tr>`).join('');
+        tbody.innerHTML = data.map(m => `<tr data-id="${m.id}" data-link="${escapeHtml(m.mapLink)}" data-name="${escapeHtml(m.name)}"><td><img src="teammartmaps.jpg" class="table-logo" onerror="this.src='https://placehold.co/36x36/0066CC/white?text=TM'"> ${escapeHtml(m.name)}</td><td>${escapeHtml(m.address)}</td><td><button class="nav-btn open-map-btn" data-link="${escapeHtml(m.mapLink)}" data-name="${escapeHtml(m.name)}" style="padding:4px 12px;font-size:12px;"><i class="fas fa-map-marked-alt"></i> Open</button></td></tr>`).join('');
         attachEvents();
     }
     
     function attachEvents() {
-        // View Map buttons
-        document.querySelectorAll('.view-map-btn').forEach(btn => btn.addEventListener('click', (e) => { 
+        // Open Map buttons - direct open, no confirmation
+        document.querySelectorAll('.open-map-btn').forEach(btn => btn.addEventListener('click', (e) => { 
             e.stopPropagation(); 
             const link = btn.dataset.link; 
             const name = btn.dataset.name;
-            if(link) { openMap(link, name); } 
+            if(link) { openGoogleMaps(link, name); } 
         }));
         
-        // Navigate buttons (open in new tab)
-        document.querySelectorAll('.navigate-btn').forEach(btn => btn.addEventListener('click', (e) => { 
-            e.stopPropagation(); 
-            const link = btn.dataset.link; 
-            if(link) { 
-                window.open(link, '_blank'); 
-                showToast(`📍 Opening in Google Maps`); 
-            } 
-        }));
-        
-        // Card/Row click to view map
+        // Card click - direct open Google Maps
         document.querySelectorAll('.market-card, #tableBody tr').forEach(el => el.addEventListener('click', (e) => { 
             if(e.target.closest('button') || e.target.closest('a')) return; 
             const link = el.dataset.link; 
             const name = el.dataset.name;
             if(link) { 
-                openMap(link, name); 
+                openGoogleMaps(link, name); 
             } 
         }));
     }
-    
-    // Open in Google Maps button
-    document.getElementById('openInGoogleBtn').addEventListener('click', function() {
-        if(currentMapLink) {
-            window.open(currentMapLink, '_blank');
-            showToast('📍 Opening in Google Maps');
-        }
-    });
-    
-    // Close modal on backdrop click
-    document.getElementById('mapModal').addEventListener('click', function(e) {
-        if(e.target === this) closeMap();
-    });
-    
-    // Close modal with Escape key
-    document.addEventListener('keydown', function(e) {
-        if(e.key === 'Escape') closeMap();
-    });
     
     document.getElementById('searchInput').addEventListener('input', () => updateFilteredAndRender());
     
