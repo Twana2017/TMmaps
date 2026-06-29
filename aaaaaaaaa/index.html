@@ -411,7 +411,7 @@
 <div class="app-container">
     <div class="credit-banner">
         <span><i class="fas fa-code"></i> Create By <span>Twana Khasro IT</span></span>
-       
+        
         <span class="view-counter" id="viewCounter"><i class="fas fa-eye"></i> <span id="viewCountDisplay">0</span></span>
     </div>
 
@@ -676,17 +676,22 @@
         updateFilteredAndRender(); 
     });
 
-    // ----- VIEW COUNTER (simple localStorage) -----
+    // ----- GLOBAL VIEW COUNTER (using API) -----
     function updateViewCounter() {
-        let views = localStorage.getItem('teammart_views');
-        if (views === null) {
-            views = 0;
-        } else {
-            views = parseInt(views, 10);
-        }
-        views += 1;
-        localStorage.setItem('teammart_views', views);
-        document.getElementById('viewCountDisplay').textContent = views;
+        const counterElement = document.getElementById('viewCountDisplay');
+        
+        // Try to get count from API (countapi.xyz - free service)
+        fetch('https://api.countapi.xyz/hit/teammartmaps/visits')
+            .then(response => response.json())
+            .then(data => {
+                if (data && data.value !== undefined) {
+                    counterElement.textContent = data.value;
+                }
+            })
+            .catch(() => {
+                // Fallback: if API fails, show a message
+                counterElement.textContent = '🔥';
+            });
     }
 
     // ---- INIT ----
@@ -694,7 +699,7 @@
         setTimeout(() => document.getElementById('preloader').classList.add('fade-out'), 700); 
         updateFilteredAndRender(); 
         document.getElementById('gridContainer').style.display = 'grid';
-        updateViewCounter(); // update view count
+        updateViewCounter(); // update view count from global API
     });
 </script>
 </body>
