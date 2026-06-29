@@ -94,9 +94,14 @@
             margin-bottom: 20px;
             box-shadow: 0 4px 15px rgba(0,102,204,0.3);
             border: 1px solid rgba(255,255,255,0.2);
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 8px 16px;
         }
         .credit-banner i {
-            margin-right: 10px;
+            margin-right: 6px;
             opacity: 0.9;
         }
         .credit-banner span {
@@ -104,6 +109,21 @@
             padding: 2px 14px;
             border-radius: 30px;
             font-weight: 700;
+        }
+        .view-counter {
+            background: rgba(255,255,255,0.2);
+            padding: 4px 16px;
+            border-radius: 40px;
+            font-size: 14px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .view-counter i {
+            margin-right: 4px;
         }
 
         .header-card {
@@ -390,7 +410,9 @@
 
 <div class="app-container">
     <div class="credit-banner">
-        <i class="fas fa-code"></i> Create By <span>Twana Khasro IT</span> <i class="fas fa-map-marked-alt"></i>
+        <span><i class="fas fa-code"></i> Create By <span>Twana Khasro IT</span></span>
+       
+        <span class="view-counter" id="viewCounter"><i class="fas fa-eye"></i> <span id="viewCountDisplay">0</span></span>
     </div>
 
     <div class="header-card">
@@ -437,7 +459,7 @@
 <script>
     // All markets data
     const ALL_MARKETS = [
-  
+      
   { "id": 17, "name": "ئازادی فرێش", "address": "ڕێزی گەس ئازادی", "mapLink": "https://maps.app.goo.gl/8JNJiWn1Bnq5jayV6" },
   { "id": 18, "name": "ئەستێرە-١", "address": "ڕێگای بنەسڵاوە", "mapLink": "https://maps.app.goo.gl/gnbZYWnPDQc8hTm57?g_st=iw" },
   { "id": 19, "name": "ئەستێرە-٢", "address": "ڕێگای بنەسڵاوە", "mapLink": "https://maps.app.goo.gl/qimLDhShfvDSA4if7?g_st=iw" },
@@ -445,15 +467,15 @@
   { "id": 21, "name": "٣٢ پارک", "address": "گەرەکی ٣٢ پارک", "mapLink": "https://goo.gl/maps/Bx58BQ4PRzvPX5B3A" },
   { "id": 22, "name": "پاکلاند", "address": "ڕێگای کۆیە بۆ هەولێر تەنیشت ماجدیلاند", "mapLink": "https://maps.app.goo.gl/PnWPVaEc6ABtY9LD6" },
   { "id": 23, "name": "باکور٢", "address": "جادەی بنەسڵاوەی کۆن", "mapLink": "https://goo.gl/maps/r9VXYJFdud9ChD75A" },
-  { "id": 24, "name": "بەختیاری٢", "address": "گەرەکی بەختیاری فەرعی بەرامبەر مەکتەب بێرکۆت", "mapLink": "https://maps.app.goo.gl/woeeFH1KMKqPyqj77?g_st=iw" },
+  { "id": 24, "name": "بەختیاری٢", "address": "گەرەکی بەختیاری فەرعی بەرام بەر مەکتەب بێرکۆت", "mapLink": "https://maps.app.goo.gl/woeeFH1KMKqPyqj77?g_st=iw" },
   { "id": 25, "name": "بەردەڕەش", "address": "بەرامبەر ئەفرین پارک", "mapLink": "https://maps.app.goo.gl/gaw5zMV7xMKJSPGTA?g_st=iw" },
   { "id": 26, "name": "بەستؤڕە", "address": "بەستۆڕە تەنیشت دواناوەندی بەستۆڕەی ئێواران", "mapLink": "https://maps.app.goo.gl/sMtV4UQJs8ib83ED8?g_st=iw" },
   { "id": 27, "name": "بەهاری نوێ", "address": "جوت سایدی بەهاری نوێ", "mapLink": "https://maps.app.goo.gl/5gbAEsnyN53JQw2v8" },
   { "id": 28, "name": "بەهەشت ١", "address": "ڕێگای دارەتوو بەرامبەر مزگەوتی ڕێگای بەهەشت", "mapLink": "https://goo.gl/maps/7hUQRNiMmxViGYXc8" },
   { "id": 29, "name": "بەحرکە-٤", "address": "ڕێگای بەحرکە یەکەم مارکێت", "mapLink": "https://maps.app.goo.gl/KkmJq1jRXQyKGBvcA" },
   { "id": 30, "name": "بەحرکە-٣", "address": "جادەی بەحرکە فەرعی بانکی بحرکە", "mapLink": "https://maps.app.goo.gl/hWPJxMca5xuzj3pr7?g_st=iw" },
-  { "id": 31, "name": "بەحرکە-٢", "address": " ڕێگای بەحرکە بەرامبەر قوتابخانەی دەشتی بنەڕەتی كوڕان ", "mapLink": "https://maps.app.goo.gl/j1WRrNQoAar2Yv7d8?g_st=iw" },
-  { "id": 32, "name": "بەحرکە-١", "address": " ڕێگای بەحرکە تەنیشت مزگەوتی خەلیفە عثمان", "mapLink": "https://maps.app.goo.gl/Dh6XSskFFfkEqGiD8?g_st=iw" },
+  { "id": 31, "name": "بەحرکە-٢", "address": "ڕێگای بەحرکە", "mapLink": "https://maps.app.goo.gl/j1WRrNQoAar2Yv7d8?g_st=iw" },
+  { "id": 32, "name": "بەحرکە-١", "address": "ڕێگای بەحرکە", "mapLink": "https://maps.app.goo.gl/Dh6XSskFFfkEqGiD8?g_st=iw" },
   { "id": 33, "name": "برایەتی-٢", "address": "جادەی برایەتی بەرامبەر وەزارەتی کارەبا", "mapLink": "https://goo.gl/maps/NeNe1jQPAmybbZvn7" },
   { "id": 34, "name": "بنەسڵاوە-٢", "address": "ڕێگای بنەسڵاوە سێریانی بنەسڵاوە", "mapLink": "https://maps.app.goo.gl/7vcSuu3vTDr3kP3J6" },
   { "id": 35, "name": "پیرزین-٢", "address": "یەکەم مارکێت بە دەستی چەپ", "mapLink": "https://maps.app.goo.gl/1uKst8wtgxXCEN5n9" },
@@ -560,7 +582,6 @@
   { "id": 136, "name": "ڕانیە-٣", "address": "بەرامبەر قوتابخانەی بنەڕەتی بابە گوڕگوڕ", "mapLink": "https://maps.app.goo.gl/roBFceRiC6sPDmuh8" },
   { "id": 137, "name": "ڕانیە-٤", "address": "جوت سایدی کێوەڕەش تەنیشت مزگەوتی خدر جاف", "mapLink": "https://maps.app.goo.gl/TWmp3LUun7DqE9Gk6" }
 
-
     ];
 
     let markets = [...ALL_MARKETS];
@@ -654,11 +675,26 @@
         document.getElementById('gridToggle').classList.remove('active'); 
         updateFilteredAndRender(); 
     });
-    
+
+    // ----- VIEW COUNTER (simple localStorage) -----
+    function updateViewCounter() {
+        let views = localStorage.getItem('teammart_views');
+        if (views === null) {
+            views = 0;
+        } else {
+            views = parseInt(views, 10);
+        }
+        views += 1;
+        localStorage.setItem('teammart_views', views);
+        document.getElementById('viewCountDisplay').textContent = views;
+    }
+
+    // ---- INIT ----
     window.addEventListener('load', () => { 
         setTimeout(() => document.getElementById('preloader').classList.add('fade-out'), 700); 
         updateFilteredAndRender(); 
-        document.getElementById('gridContainer').style.display = 'grid'; 
+        document.getElementById('gridContainer').style.display = 'grid';
+        updateViewCounter(); // update view count
     });
 </script>
 </body>
